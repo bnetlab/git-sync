@@ -48,4 +48,9 @@ if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
   git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/dst_rsa"
 fi
 
-git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f
+
+git config --global user.email "sync-bot@example.com"
+git config --global user.name "Sync Bot"
+git config pull.rebase false
+git pull destination "${DESTINATION_BRANCH}"
+git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}"
